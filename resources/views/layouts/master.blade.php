@@ -79,7 +79,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
           <li class="nav-item">
             <router-link to="personal" class="nav-link ">
-              <i> <img src="{{ asset('/img/group.png') }}" alt="" class="nav-icon"> </i>
+              <i> <img src="{{ asset('/img/employee.png') }}" alt="" class="nav-icon"> </i>
               <p>Personal</p>
             </router-link>
           </li>

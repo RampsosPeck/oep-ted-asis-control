@@ -32,6 +32,17 @@ class UserController extends Controller
         }
 
     }
+    public function personas()
+    {
+        //$this->authorize('isAdmin');
+
+        if(\Gate::allows('isAdmin') || \Gate::allows('isAuthor'))
+        {
+            $users = User::where('type','user')->latest()->paginate(10);
+            return UserResource::collection($users);
+        }
+
+    }
 
     /**
      * Store a newly created resource in storage.
