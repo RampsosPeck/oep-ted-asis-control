@@ -24,9 +24,9 @@
                     <div class="icon">
                         <img src="/img/qr-codes.png" width="90" class="my-4">
                     </div>
-                    <a href="#" class="small-box-footer">
+                    <router-link to="scan" class="small-box-footer">
                         INICIAR <i class="fas fa-arrow-circle-right"></i>
-                    </a>
+                    </router-link>
                 </div>
             </div>
             <div class="col-md-4">

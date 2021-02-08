@@ -40,6 +40,12 @@ Vue.component('pagination', require('laravel-vue-pagination'));
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
+/*QR IMPORT GLOBAL*/
+import Vue from "vue";
+import VueQrcodeReader from "vue-qrcode-reader";
+Vue.use(VueQrcodeReader);
+/*HASTA AQUI*/
+
 // configuracion de vue progress bar
 import VueProgressBar from 'vue-progressbar'
 Vue.use(VueProgressBar, {

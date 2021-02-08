@@ -13,4 +13,9 @@ class Horario extends Model
     protected $dates = [
         'fecha'
     ];
+
+    public function registros()
+    {
+        return $this->hasMany(Registro::class);
+    }
 }
