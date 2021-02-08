@@ -227,7 +227,8 @@
 </script>
 @endauth
 
-<!-- jQuery -->
+<script src="/js/can.js"></script>
 <script src="/js/app.js"></script>
+
 </body>
 </html>

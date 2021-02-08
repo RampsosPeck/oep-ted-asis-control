@@ -41,10 +41,13 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 /*QR IMPORT GLOBAL*/
-import Vue from "vue";
+//import Vue from "vue";
 import VueQrcodeReader from "vue-qrcode-reader";
 Vue.use(VueQrcodeReader);
 /*HASTA AQUI*/
+//const Instascan = require('instascan');
+//window.Instascan = Instascan;
+/*otro qr mejor*/
 
 // configuracion de vue progress bar
 import VueProgressBar from 'vue-progressbar'
