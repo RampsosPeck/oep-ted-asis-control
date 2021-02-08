@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Cargo;
+use App\Horario;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\CargoResource;
+use App\Http\Resources\HorarioResource;
 use Illuminate\Http\Request;
 
-class CargoController extends Controller
+class HorarioController extends Controller
 {
     public function __construct()
     {
@@ -23,8 +23,8 @@ class CargoController extends Controller
         if(\Gate::allows('isAdmin'))
         {
             //return User::orderBy('id','DESC')->paginate(10);
-            $cargos = Cargo::latest()->paginate(10);
-            return CargoResource::collection($cargos);
+            $horarios = Horario::latest()->paginate(10);
+            return HorarioResource::collection($horarios);
         }
     }
 
@@ -49,15 +49,23 @@ class CargoController extends Controller
         $this->validate($request,[
             'nombre' => ['required','unique:cargos,nombre'],
             'fecha' => ['required'],
+            'ingresom' => 'date_format:H:i',
+            'salidam' => 'date_format:H:i|after:ingresom',
+            'ingresot' => 'date_format:H:i',
+            'salidat' => 'date_format:H:i|after:ingresot',
         ]);
 
         //return ['message' => 'I have your data'];
-        Cargo::create([
+        Horario::create([
             'nombre' => $request['nombre'],
             'fecha' => $request['fecha'],
+            'ingresom' => $request['ingresom'],
+            'salidam' => $request['salidam'],
+            'ingresot' => $request['ingresot'],
+            'salidat' => $request['salidat'],
         ]);
 
-        return response()->json(['message' => 'El cargo '.$request['nombre']], 200);
+        return response()->json(['message' => 'El horario '.$request['nombre']], 200);
     }
 
     /**
@@ -91,16 +99,23 @@ class CargoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $cargo = Cargo::findOrFail($id);
 
-        $this->validate($request, [
-            'nombre' => 'required|string|max:191',
+
+        $horario = Horario::findOrFail($id);
+
+        $this->validate($request,[
+            'nombre' => ['required'],
             'fecha' => ['required'],
+            'ingresom' => 'required',
+            'salidam' => 'required',
+            'ingresot' => 'required',
+            'salidat' => 'required',
         ]);
+        $horario->update($request->all());
 
-        $cargo->update($request->all());
+        return ['message' => 'Se actualizó el horario!'];
 
-        return ['message' => 'Se actualizó el cargo'];
+
     }
 
     /**
@@ -113,10 +128,10 @@ class CargoController extends Controller
     {
         $this->authorize('isAdmin');
 
-        $cargo = Cargo::findOrFail($id);
+        $horario = Horario::findOrFail($id);
 
-        $cargo->delete();
+        $horario->delete();
 
-        return  ['message' => 'El cargo fue eliminado'];
+        return  ['message' => 'El horario fue eliminado'];
     }
 }

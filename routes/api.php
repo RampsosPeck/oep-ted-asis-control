@@ -27,3 +27,4 @@ Route::put('profile','API\UserController@updateProfile');
 Route::get('personas','API\UserController@personas');
 
 Route::apiResources(['cargo' => 'API\CargoController']);
+Route::apiResources(['horarios' => 'API\HorarioController']);

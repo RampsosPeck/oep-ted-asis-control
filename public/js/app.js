@@ -2159,6 +2159,256 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Horario.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Horario.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      editmode: false,
+      horarios: {},
+      form: new Form({
+        id: '',
+        nombre: '',
+        fecha: '',
+        ingresom: '',
+        salidam: '',
+        ingresot: '',
+        salidat: ''
+      })
+    };
+  },
+  methods: {
+    updateHorario: function updateHorario(id) {
+      var _this = this;
+
+      this.$Progress.start();
+      this.form.put('api/horarios/' + this.form.id).then(function () {
+        $('#addNew').modal('hide');
+        swal.fire('Excelente!', 'Se actualizó el horario.', 'success');
+
+        _this.$Progress.finish();
+
+        Fire.$emit('AfterCreate');
+      }).catch(function () {
+        swal.fire('Oops...!', 'Algo salió mal.', 'warning');
+
+        _this.$Progress.fail();
+      });
+    },
+    editModal: function editModal(cargo) {
+      this.editmode = true;
+      this.form.reset();
+      $('#addNew').modal('show');
+      this.form.fill(cargo);
+    },
+    newModal: function newModal() {
+      this.editmode = false;
+      this.form.reset();
+      $('#addNew').modal('show');
+    },
+    deleteHorario: function deleteHorario(id) {
+      var _this2 = this;
+
+      swal.fire({
+        title: '¿Estás seguro?',
+        text: "¡No podrás revertir esto!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '¡Sí, bórralo!'
+      }).then(function (result) {
+        if (result.value) {
+          _this2.form.delete('api/horarios/' + id).then(function () {
+            swal.fire('Excelente!', 'El horario fue eliminado.', 'success');
+            Fire.$emit('AfterCreate');
+          }).catch(function () {
+            swal.fire('Failed!', 'Revise algo salio mal.', 'warning');
+          });
+        }
+      });
+    },
+    loadHorario: function loadHorario() {
+      var _this3 = this;
+
+      if (this.$gate.isAdminOrAuthor()) {
+        axios.get("api/horarios").then(function (_ref) {
+          var data = _ref.data;
+          return _this3.horarios = data;
+        });
+      }
+    },
+    createHorario: function createHorario() {
+      var _this4 = this;
+
+      this.$Progress.start();
+      this.form.post('api/horarios').then(function (result) {
+        Fire.$emit('AfterCreate');
+        $('#addNew').modal('hide'); //toast.fire({
+
+        swal.fire({
+          type: 'success',
+          title: "<b>".concat(result.data.message, "</b>"),
+          text: "Fue creado correctamente!",
+          showConfirmButton: false,
+          timer: 2000
+        });
+
+        _this4.$Progress.finish();
+      }).catch(function () {
+        swal.fire('Oops...!', 'Algo salió mal.', 'warning');
+
+        _this4.$Progress.fail();
+      });
+    }
+  },
+  created: function created() {
+    var _this5 = this;
+
+    this.loadHorario();
+    Fire.$on('AfterCreate', function () {
+      _this5.loadHorario();
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/NotFound.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/NotFound.vue?vue&type=script&lang=js& ***!
@@ -62697,9 +62947,29 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _vm._m(6),
+      _c("div", { staticClass: "col-md-4" }, [
+        _c(
+          "div",
+          { staticClass: "small-box sidebar-dark-primary" },
+          [
+            _vm._m(6),
+            _vm._v(" "),
+            _vm._m(7),
+            _vm._v(" "),
+            _c(
+              "router-link",
+              { staticClass: "small-box-footer", attrs: { to: "horario" } },
+              [
+                _vm._v("\n                    VER "),
+                _c("i", { staticClass: "fas fa-arrow-circle-right" })
+              ]
+            )
+          ],
+          1
+        )
+      ]),
       _vm._v(" "),
-      _vm._m(7)
+      _vm._m(8)
     ])
   ])
 }
@@ -62828,33 +63098,28 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-4" }, [
-      _c("div", { staticClass: "small-box sidebar-dark-primary" }, [
-        _c("div", { staticClass: "inner" }, [
-          _c("h3", { staticStyle: { color: "#fff" } }, [
-            _c("i", {
-              staticClass: "fa fa-check-square",
-              attrs: { "aria-hidden": "true" }
-            })
-          ]),
-          _vm._v(" "),
-          _c("p", { staticStyle: { color: "#fff" } }, [
-            _c("b", [_vm._v("Horario")])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "icon" }, [
-          _c("img", {
-            staticClass: "my-4",
-            attrs: { src: "/img/clock.png", width: "90" }
-          })
-        ]),
-        _vm._v(" "),
-        _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
-          _vm._v("\n                    VER "),
-          _c("i", { staticClass: "fas fa-arrow-circle-right" })
-        ])
+    return _c("div", { staticClass: "inner" }, [
+      _c("h3", { staticStyle: { color: "#fff" } }, [
+        _c("i", {
+          staticClass: "fa fa-check-square",
+          attrs: { "aria-hidden": "true" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("p", { staticStyle: { color: "#fff" } }, [
+        _c("b", [_vm._v("Horario")])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("img", {
+        staticClass: "my-4",
+        attrs: { src: "/img/clock.png", width: "90" }
+      })
     ])
   },
   function() {
@@ -62979,6 +63244,655 @@ var staticRenderFns = [
         ])
       ])
     ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Horario.vue?vue&type=template&id=29fe9f72&":
+/*!**********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Horario.vue?vue&type=template&id=29fe9f72& ***!
+  \**********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _vm.$gate.isAdminOrAuthor()
+        ? _c("div", { staticClass: "row mt-5" }, [
+            _c("div", { staticClass: "col-md-12 mx-auto" }, [
+              _c(
+                "div",
+                { staticClass: "card border-0 bg-light mb-3 shadow-sm" },
+                [
+                  _c("div", { staticClass: "card-header cyane" }, [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "card-tools" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-outline-primary",
+                          on: { click: _vm.newModal }
+                        },
+                        [
+                          _c("i", { staticClass: "fas fa-user-plus" }),
+                          _vm._v(" Nuevo horario")
+                        ]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "card-body table-responsive p-0" }, [
+                    _c("table", { staticClass: "table table-striped" }, [
+                      _c(
+                        "tbody",
+                        [
+                          _vm._m(1),
+                          _vm._v(" "),
+                          _vm._l(_vm.horarios.data, function(
+                            horario,
+                            key,
+                            index
+                          ) {
+                            return _c("tr", { key: horario.id }, [
+                              _c("td", {
+                                domProps: { textContent: _vm._s(horario.id) }
+                              }),
+                              _vm._v(" "),
+                              _c("td", {
+                                domProps: {
+                                  textContent: _vm._s(horario.nombre)
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("td", { staticClass: "text-center" }, [
+                                _vm._v(
+                                  " " +
+                                    _vm._s(_vm._f("myDate")(horario.created_at))
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("td", {
+                                domProps: {
+                                  textContent: _vm._s(horario.ingresom)
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("td", {
+                                domProps: {
+                                  textContent: _vm._s(horario.salidam)
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("td", {
+                                domProps: {
+                                  textContent: _vm._s(horario.ingresot)
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("td", {
+                                domProps: {
+                                  textContent: _vm._s(horario.salidat)
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("td", { staticClass: "text-center" }, [
+                                _c(
+                                  "a",
+                                  {
+                                    attrs: { href: "#" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.editModal(horario)
+                                      }
+                                    }
+                                  },
+                                  [_c("i", { staticClass: "fas fa-edit blue" })]
+                                ),
+                                _vm._v(" /\n                            "),
+                                _c(
+                                  "a",
+                                  {
+                                    attrs: { href: "#" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.deleteHorario(horario.id)
+                                      }
+                                    }
+                                  },
+                                  [_c("i", { staticClass: "fas fa-trash red" })]
+                                )
+                              ])
+                            ])
+                          })
+                        ],
+                        2
+                      )
+                    ])
+                  ])
+                ]
+              )
+            ])
+          ])
+        : _vm._e()
+    ]),
+    _vm._v(" "),
+    !_vm.$gate.isAdminOrAuthor() ? _c("div", [_c("not-found")], 1) : _vm._e(),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "addNew",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "addNewLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-dialog-centered",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c(
+                "div",
+                { staticClass: "modal-header sidebar-dark-primary text-white" },
+                [
+                  _c(
+                    "h5",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: !_vm.editmode,
+                          expression: "!editmode"
+                        }
+                      ],
+                      staticClass: "modal-title",
+                      attrs: { id: "addNewLabel" }
+                    },
+                    [_c("b", [_vm._v("NUEVO HORARIO")])]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "h5",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.editmode,
+                          expression: "editmode"
+                        }
+                      ],
+                      staticClass: "modal-title",
+                      attrs: { id: "addNewLabel" }
+                    },
+                    [_c("b", [_vm._v("ACTUALIZAR HORARIO")])]
+                  ),
+                  _vm._v(" "),
+                  _vm._m(2)
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      _vm.editmode ? _vm.updateHorario() : _vm.createHorario()
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-sm-5 col-form-label",
+                          attrs: { for: "nombre" }
+                        },
+                        [_vm._v("Nombre:")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "col-sm-7" },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.nombre,
+                                expression: "form.nombre"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form.errors.has("nombre")
+                            },
+                            attrs: {
+                              type: "text",
+                              name: "nombre",
+                              placeholder: "Nombre del horario"
+                            },
+                            domProps: { value: _vm.form.nombre },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form,
+                                  "nombre",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: { form: _vm.form, field: "nombre" }
+                          })
+                        ],
+                        1
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-sm-5 col-form-label",
+                          attrs: { for: "fecha" }
+                        },
+                        [_vm._v("Fecha:")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "col-sm-7" },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.fecha,
+                                expression: "form.fecha"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form.errors.has("fecha")
+                            },
+                            attrs: {
+                              type: "date",
+                              name: "fecha",
+                              placeholder: "Fecha del horario"
+                            },
+                            domProps: { value: _vm.form.fecha },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(_vm.form, "fecha", $event.target.value)
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: { form: _vm.form, field: "fecha" }
+                          })
+                        ],
+                        1
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-sm-5 col-form-label",
+                          attrs: { for: "ingresom" }
+                        },
+                        [_vm._v("Ingreso manana:")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "col-sm-7" },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.ingresom,
+                                expression: "form.ingresom"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form.errors.has("ingresom")
+                            },
+                            attrs: {
+                              type: "time",
+                              name: "ingresom",
+                              placeholder: "Hora de ingreso"
+                            },
+                            domProps: { value: _vm.form.ingresom },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form,
+                                  "ingresom",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: { form: _vm.form, field: "ingresom" }
+                          })
+                        ],
+                        1
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-sm-5 col-form-label",
+                          attrs: { for: "salidam" }
+                        },
+                        [_vm._v("Salida manana:")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "col-sm-7" },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.salidam,
+                                expression: "form.salidam"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form.errors.has("salidam")
+                            },
+                            attrs: {
+                              type: "time",
+                              name: "salidam",
+                              placeholder: "Hora de ingreso"
+                            },
+                            domProps: { value: _vm.form.salidam },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form,
+                                  "salidam",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: { form: _vm.form, field: "salidam" }
+                          })
+                        ],
+                        1
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-sm-5 col-form-label",
+                          attrs: { for: "ingresot" }
+                        },
+                        [_vm._v("Ingreso tarde:")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "col-sm-7" },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.ingresot,
+                                expression: "form.ingresot"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form.errors.has("ingresot")
+                            },
+                            attrs: {
+                              type: "time",
+                              name: "ingresot",
+                              placeholder: "Hora de ingreso"
+                            },
+                            domProps: { value: _vm.form.ingresot },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form,
+                                  "ingresot",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: { form: _vm.form, field: "ingresot" }
+                          })
+                        ],
+                        1
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-sm-5 col-form-label",
+                          attrs: { for: "salidat" }
+                        },
+                        [_vm._v("Salida tarde:")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "col-sm-7" },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.salidat,
+                                expression: "form.salidat"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form.errors.has("salidat")
+                            },
+                            attrs: {
+                              type: "time",
+                              name: "salidat",
+                              placeholder: "Hora de ingreso"
+                            },
+                            domProps: { value: _vm.form.salidat },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form,
+                                  "salidat",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: { form: _vm.form, field: "salidat" }
+                          })
+                        ],
+                        1
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-footer text-center cyane" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger",
+                        attrs: { type: "button", "data-dismiss": "modal" }
+                      },
+                      [_vm._v("CANCELAR")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.editmode,
+                            expression: "editmode"
+                          }
+                        ],
+                        staticClass: "btn btn-info",
+                        attrs: { type: "submit" }
+                      },
+                      [_vm._v("ACTUALIZAR")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !_vm.editmode,
+                            expression: "!editmode"
+                          }
+                        ],
+                        staticClass: "btn btn-success",
+                        attrs: { type: "submit" }
+                      },
+                      [_vm._v("CREAR HORARIO")]
+                    )
+                  ])
+                ]
+              )
+            ])
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h3", { staticClass: "card-title" }, [
+      _c("b", [_vm._v("HORARIO")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", { staticClass: "text-center" }, [_vm._v("Nro.")]),
+      _vm._v(" "),
+      _c("th", { staticClass: "text-center" }, [_vm._v("Nombre")]),
+      _vm._v(" "),
+      _c("th", { staticClass: "text-center" }, [_vm._v("Fecha")]),
+      _vm._v(" "),
+      _c("th", { staticClass: "text-center" }, [_vm._v("Ingreso")]),
+      _vm._v(" "),
+      _c("th", { staticClass: "text-center" }, [_vm._v("Salida")]),
+      _vm._v(" "),
+      _c("th", { staticClass: "text-center" }, [_vm._v("Ingreso")]),
+      _vm._v(" "),
+      _c("th", { staticClass: "text-center" }, [_vm._v("Salida")]),
+      _vm._v(" "),
+      _c("th", { staticClass: "text-center" }, [_vm._v("Acciones")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
   }
 ]
 render._withStripped = true
@@ -81764,17 +82678,20 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-var render, staticRenderFns
-var script = {}
+/* harmony import */ var _Horario_vue_vue_type_template_id_29fe9f72___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Horario.vue?vue&type=template&id=29fe9f72& */ "./resources/js/components/Horario.vue?vue&type=template&id=29fe9f72&");
+/* harmony import */ var _Horario_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Horario.vue?vue&type=script&lang=js& */ "./resources/js/components/Horario.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(
-  script,
-  render,
-  staticRenderFns,
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Horario_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Horario_vue_vue_type_template_id_29fe9f72___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Horario_vue_vue_type_template_id_29fe9f72___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -81782,8 +82699,42 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   
 )
 
+/* hot reload */
+if (false) { var api; }
 component.options.__file = "resources/js/components/Horario.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Horario.vue?vue&type=script&lang=js&":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/Horario.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Horario_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Horario.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Horario.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Horario_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Horario.vue?vue&type=template&id=29fe9f72&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/Horario.vue?vue&type=template&id=29fe9f72& ***!
+  \****************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Horario_vue_vue_type_template_id_29fe9f72___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Horario.vue?vue&type=template&id=29fe9f72& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Horario.vue?vue&type=template&id=29fe9f72&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Horario_vue_vue_type_template_id_29fe9f72___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Horario_vue_vue_type_template_id_29fe9f72___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 
